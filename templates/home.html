@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+<div class="container">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-warning">
+                <strong>{{ message }}</strong>
+            </div>
+        {% endfor %}
+    {% endif %}
+    {% if jobs %}
+    <h2 class="text_white_color">Recent Jobs</h2>
+    <div class="panel-group">
+        {% for job in jobs%}
+        <div class="panel panel-info">
+            <div class="panel-heading">{{job.jobtitle}}<small class="pull-right">Posted on :{{job.posted_date}}</small></div>
+            <div class="panel-body">{{job.jobdescription}}</div>
+            <div class="panel-footer">Expiry on : {{job.expiry_date}}
+                <a type="button" href="/apply/{{job.id}}" class="btn btn-success pull-right" style="padding-top:0px;padding-bottom:0px">Apply</a>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <h3 class="text-center text_white_color" >Oops...No Jobs Available..</h3>
+    {% endif %}
+    </div>
+</div>
+{% endblock %}

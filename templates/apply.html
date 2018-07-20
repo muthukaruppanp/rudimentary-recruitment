@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+<div class="container">
+    <h3 class="text_white_color text-center">You are appling for {{jobdata}}</h3>
+    <div class="main_content">
+        <form method="post" enctype="multipart/form-data" class="job_apply_form" novalidate>
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            <div class="divTable apply_table">
+                <div class="divTableBody">
+                    {% for field in form.visible_fields %}
+                    <div class="divTableRow">
+                        <div class="divTableCell">{{ field.label_tag }}</div>
+                        <div class="divTableCell">{{ field }}</div>
+                    </div>
+                    {{ field.errors }}
+                    {% endfor %}
+                </div>
+            </div>
+            <input type="hidden" name="applied_for" value="{{jobid}}"/>
+            <button type="submit" class="btn submit_btn">Submit</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
